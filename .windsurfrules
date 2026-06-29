@@ -1,0 +1,129 @@
+# Windsurf Rules for SvelteKit-NestJS-Turbo
+
+## Project Overview
+Full-stack production SvelteKit-NestJS-Turbo with SvelteKit, NestJS, TypeORM, PostgreSQL, and Turborepo.
+
+## Tech Stack
+- **Frontend**: SvelteKit + TailwindCSS + Shadcn-Svelte + Melt UI
+- **Backend**: NestJS + TypeORM + PostgreSQL + Redis
+- **Monorepo**: Turborepo
+- **Language**: TypeScript (strict mode)
+
+## Structure
+```
+apps/
+  web/          # SvelteKit app (port 3002)
+  api/          # NestJS API (port 3001)
+packages/
+  types/        # Shared TS types
+  config/       # ESLint & Prettier
+  ui/           # Shared components (future)
+  database/     # Shared entities (future)
+```
+
+## Development
+```bash
+npm run dev                                        # All apps
+npm run dev --workspace=web                        # Frontend only
+npm run dev --workspace=api                        # Backend only
+docker compose -f docker-compose.dev.yml up -d     # Start databases
+```
+
+## Coding Standards
+
+### TypeScript
+- Strict mode enabled
+- No `any` types
+- Prefer `const`, async/await
+- Functions < 50 lines
+
+### File Naming
+- Source files: `kebab-case.ts`
+- Components: `PascalCase.svelte`
+- Functions: `camelCase()`
+- Constants: `UPPER_SNAKE_CASE`
+
+### Svelte Component Structure
+```svelte
+<script lang="ts">
+  // 1. Imports
+  // 2. Props (export let)
+  // 3. State
+  // 4. Reactive ($:)
+  // 5. Functions
+  // 6. Lifecycle
+</script>
+
+<!-- HTML with TailwindCSS -->
+<style>/* Scoped styles if needed */</style>
+```
+
+### NestJS Patterns
+- Use decorators consistently
+- DTOs with class-validator
+- Swagger on all endpoints
+- Proper DI
+
+## Common Tasks
+
+### Add API Endpoint
+```bash
+cd apps/api && npx nest g resource modules/[name]
+```
+
+### Add Frontend Route
+Create `apps/web/src/routes/[name]/+page.svelte`
+
+### Add Shared Type
+Edit `packages/types/index.ts`
+
+### Database Migration
+```bash
+cd apps/api && npm run typeorm migration:create src/migrations/[Name]
+```
+
+## Configuration
+- Database: localhost:5433 (PostgreSQL), localhost:6379 (Redis)
+- Environment: apps/api/.env
+- TypeScript: Strict mode across all packages
+
+## Styling
+- TailwindCSS utilities first
+- Use `cn()` helper for conditional classes
+- Shadcn-Svelte for UI components
+- Melt UI for headless primitives
+
+## Security Checklist
+- Validate all inputs
+- Use parameterized queries
+- Keep secrets in .env
+- Sanitize production errors
+- Enable CORS selectively
+
+## Testing
+- Unit: Vitest
+- E2E: Playwright
+- Run before committing
+
+## Component Libraries
+- **Shadcn-Svelte**: https://shadcn-svelte.com (copy-paste)
+- **Melt UI**: https://melt-ui.com (headless)
+
+## Before Coding
+1. Read existing patterns
+2. Check dependencies
+3. Match style
+4. Test locally
+5. Update docs if needed
+
+## Priorities
+1. Type safety
+2. Consistency
+3. Simplicity
+4. Developer experience
+
+## Avoid
+- `any` types
+- Committing secrets
+- Breaking existing patterns
+- Adding deps without checking alternatives

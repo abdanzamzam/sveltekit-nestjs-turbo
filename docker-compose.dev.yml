@@ -1,0 +1,29 @@
+# Development docker-compose (faster, with hot reload)
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: sveltekit-nestjs-turbo-db-dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: sveltekit_nestjs_turbo
+    ports:
+      - '5433:5432'
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: sveltekit-nestjs-turbo-redis-dev
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data_dev:/data
+
+volumes:
+  postgres_data_dev:
+  redis_data_dev:

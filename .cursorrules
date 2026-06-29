@@ -1,0 +1,198 @@
+# Cursor Rules for SvelteKit-NestJS-Turbo
+
+## Project Context
+
+This is a production-ready full-stack SvelteKit-NestJS-Turbo with:
+- Frontend: SvelteKit + TailwindCSS + Shadcn-Svelte + Melt UI
+- Backend: NestJS + TypeORM + PostgreSQL
+- Monorepo: Turborepo
+- Database: PostgreSQL 16 + Redis 7
+
+## File Structure
+
+```
+apps/
+  web/          # SvelteKit frontend (port 3002)
+  api/          # NestJS backend (port 3001)
+packages/
+  types/        # Shared TypeScript types
+  config/       # ESLint & Prettier configs
+  ui/           # Shared UI components (reserved)
+  database/     # Shared entities (reserved)
+```
+
+## Development Commands
+
+```bash
+# Start all services
+npm run dev
+
+# Start individual apps
+npm run dev --workspace=web
+npm run dev --workspace=api
+
+# Build all
+npm run build
+
+# Database
+docker compose -f docker-compose.dev.yml up -d  # Start PostgreSQL + Redis
+```
+
+## Code Style Guidelines
+
+### TypeScript
+- Use strict mode
+- Prefer `const` over `let`
+- Use async/await over Promises
+- Keep functions small (<50 lines)
+
+### Naming
+- Files: `kebab-case.ts`
+- Components: `PascalCase.svelte`
+- Functions: `camelCase()`
+- Constants: `UPPER_SNAKE_CASE`
+
+### Svelte Components
+```svelte
+<script lang="ts">
+  // 1. Imports
+  import { onMount } from 'svelte';
+  
+  // 2. Props
+  export let title: string;
+  
+  // 3. State
+  let count = 0;
+  
+  // 4. Reactive statements
+  $: doubled = count * 2;
+  
+  // 5. Functions
+  function increment() { count += 1; }
+  
+  // 6. Lifecycle
+  onMount(() => {});
+</script>
+
+<!-- Markup with TailwindCSS -->
+<div class="flex items-center gap-4">
+  <h1>{title}</h1>
+  <button on:click={increment}>+</button>
+</div>
+```
+
+### NestJS
+- Use decorators consistently
+- Implement DTOs with class-validator
+- Add Swagger decorators for all endpoints
+- Use proper dependency injection
+
+## Adding Features
+
+### New API Endpoint
+```bash
+cd apps/api
+npx nest g module modules/users
+npx nest g controller modules/users
+npx nest g service modules/users
+```
+
+### New Frontend Route
+```bash
+# Create in apps/web/src/routes/
+touch apps/web/src/routes/about/+page.svelte
+```
+
+### Shared Types
+Add to `packages/types/index.ts` and use in both apps.
+
+## Database
+
+- PostgreSQL: `localhost:5433`
+- Redis: `localhost:6379`
+- Connection config: `apps/api/.env`
+
+## Testing
+
+- Unit tests: Vitest (setup ready)
+- E2E tests: Playwright (setup ready)
+
+## Styling
+
+- Use TailwindCSS utility classes first
+- Use `cn()` helper from `$lib/utils` for conditional classes
+- Extend theme in `tailwind.config.js`
+
+## Component Libraries
+
+- **Shadcn-Svelte**: Copy-paste components from https://shadcn-svelte.com
+- **Melt UI**: Headless primitives from https://melt-ui.com
+
+## Security
+
+- Validate all inputs (class-validator)
+- Use parameterized queries (TypeORM does this)
+- Sanitize error messages in production
+- Keep secrets in `.env` (never commit)
+
+## Performance
+
+- Code split routes automatically (SvelteKit)
+- Use database indexes
+- Implement caching with Redis
+- Use pagination for large datasets
+
+## When Adding Code
+
+1. Read existing patterns first
+2. Match project style
+3. Add TypeScript types
+4. Test locally before committing
+5. Update README if adding new features
+
+## Common Patterns
+
+### API Response Format
+```typescript
+interface ApiResponse<T = any> {
+  success: boolean;
+  data?: T;
+  error?: string;
+  message?: string;
+}
+```
+
+### Error Handling
+```typescript
+try {
+  // code
+} catch (error) {
+  this.logger.error('Context', error);
+  throw new InternalServerErrorException('User-friendly message');
+}
+```
+
+### Component Props
+```svelte
+<script lang="ts">
+  import type { User } from '@repo/types';
+  export let user: User;
+  export let onUpdate: (user: User) => void = () => {};
+</script>
+```
+
+## Avoid
+
+- Don't use `any` type
+- Don't commit secrets
+- Don't use `rm` (use `trash` if available)
+- Don't modify config without checking existing setup
+- Don't add dependencies without checking alternatives
+
+## Goals
+
+- Keep it simple
+- Maintain type safety
+- Follow existing patterns
+- Write self-documenting code
+- Prioritize developer experience

@@ -1,0 +1,98 @@
+# Cline Rules for SvelteKit-NestJS-Turbo
+
+You are working on a production-ready full-stack SvelteKit-NestJS-Turbo.
+
+## Stack
+- Frontend: SvelteKit + TailwindCSS + Shadcn-Svelte + Melt UI
+- Backend: NestJS + TypeORM + PostgreSQL + Redis
+- Monorepo: Turborepo
+- Dev: TypeScript strict mode
+
+## Project Structure
+```
+apps/web/     → SvelteKit frontend (port 3002)
+apps/api/     → NestJS backend (port 3001)
+packages/     → Shared code (types, config, ui, database)
+```
+
+## Key Commands
+```bash
+npm run dev              # Start all
+npm run build            # Build all
+docker compose -f docker-compose.dev.yml up -d  # Databases
+```
+
+## Code Standards
+
+### TypeScript
+- Strict mode enabled
+- No `any` types
+- Prefer `const` and async/await
+- Keep functions under 50 lines
+
+### Naming Conventions
+- Files: kebab-case.ts
+- Components: PascalCase.svelte
+- Functions: camelCase()
+- Constants: UPPER_SNAKE_CASE
+- Interfaces: PascalCase (no I prefix)
+
+### Svelte Order
+1. Imports
+2. Props (export let)
+3. State variables
+4. Reactive statements ($:)
+5. Functions
+6. Lifecycle hooks
+
+### NestJS Patterns
+- Use decorators (@Injectable, @Controller, etc.)
+- DTOs with class-validator
+- Swagger decorators on all endpoints
+- Proper dependency injection
+
+## Adding Features
+
+### New API Endpoint
+```bash
+cd apps/api
+npx nest g resource modules/[name]
+```
+
+### New Frontend Page
+Create in `apps/web/src/routes/[name]/+page.svelte`
+
+### Shared Types
+Add to `packages/types/index.ts`
+
+## Database
+- PostgreSQL: localhost:5433
+- Redis: localhost:6379
+- Config: apps/api/.env
+
+## Styling
+- TailwindCSS first
+- Use `cn()` from $lib/utils for conditional classes
+- Component libraries: Shadcn-Svelte, Melt UI
+
+## Security
+- Validate inputs (class-validator)
+- Parameterized queries (TypeORM)
+- Secrets in .env only
+- Sanitize production errors
+
+## Testing
+- Vitest for unit tests
+- Playwright for E2E
+
+## Before Making Changes
+1. Read existing patterns
+2. Check package.json for dependencies
+3. Match coding style
+4. Test locally
+
+## Goals
+- Type safety everywhere
+- Follow existing patterns
+- Simple > clever
+- DX matters

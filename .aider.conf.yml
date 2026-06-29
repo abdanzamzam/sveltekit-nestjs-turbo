@@ -1,0 +1,78 @@
+# Aider Configuration for SvelteKit-NestJS-Turbo
+
+# Model settings
+model: gpt-4
+edit-format: whole
+
+# Git integration
+auto-commits: true
+dirty-commits: false
+commit-prompt: true
+
+# File patterns
+watch-files:
+  - "apps/**/*.ts"
+  - "apps/**/*.svelte"
+  - "packages/**/*.ts"
+  - "*.md"
+
+# Chat history
+chat-history-file: .aider.chat.history.md
+
+# Map settings
+show-diffs: true
+pretty: true
+
+# Linting
+lint-cmd: npm run lint
+
+# Testing
+test-cmd: npm run test
+
+# Additional instructions
+attribute-author: true
+attribute-committer: true
+attribute-commit-message-author: true
+
+# Excluded paths
+ignore:
+  - node_modules/
+  - dist/
+  - build/
+  - .next/
+  - .svelte-kit/
+  - coverage/
+  - .turbo/
+
+# Project context
+instructions: |
+  This is a full-stack TypeScript SvelteKit-NestJS-Turbo:
+  
+  Stack:
+  - Frontend: SvelteKit + TailwindCSS + Shadcn-Svelte
+  - Backend: NestJS + TypeORM + PostgreSQL
+  - Monorepo: Turborepo
+  
+  Key Principles:
+  - TypeScript strict mode
+  - Type safety across frontend-backend
+  - Follow existing patterns
+  - Keep functions small
+  - Test before committing
+  
+  Structure:
+  - apps/web/ → Frontend (port 3002)
+  - apps/api/ → Backend (port 3001)
+  - packages/ → Shared code
+  
+  Naming:
+  - Files: kebab-case.ts
+  - Components: PascalCase.svelte
+  - Functions: camelCase()
+  - Constants: UPPER_SNAKE_CASE
+  
+  Before making changes:
+  1. Read existing code
+  2. Match the style
+  3. Maintain type safety
+  4. Update docs if needed
