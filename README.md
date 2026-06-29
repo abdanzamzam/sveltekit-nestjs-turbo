@@ -1,5 +1,18 @@
 # SvelteKit-NestJS-Turbo - Production-Ready Boilerplate
 
+[![GitHub stars](https://img.shields.io/github/stars/abdanzamzam/sveltekit-nestjs-turbo?style=for-the-badge)](https://github.com/abdanzamzam/sveltekit-nestjs-turbo/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/abdanzamzam/sveltekit-nestjs-turbo?style=for-the-badge)](https://github.com/abdanzamzam/sveltekit-nestjs-turbo/network)
+[![GitHub issues](https://img.shields.io/github/issues/abdanzamzam/sveltekit-nestjs-turbo?style=for-the-badge)](https://github.com/abdanzamzam/sveltekit-nestjs-turbo/issues)
+[![GitHub license](https://img.shields.io/github/license/abdanzamzam/sveltekit-nestjs-turbo?style=for-the-badge)](https://github.com/abdanzamzam/sveltekit-nestjs-turbo/blob/main/LICENSE)
+
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![SvelteKit](https://img.shields.io/badge/SvelteKit-FF3E00?style=for-the-badge&logo=svelte&logoColor=white)](https://kit.svelte.dev/)
+[![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)](https://nestjs.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Turborepo](https://img.shields.io/badge/Turborepo-EF4444?style=for-the-badge&logo=turborepo&logoColor=white)](https://turbo.build/)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+
 Modern full-stack starter kit with SvelteKit, NestJS, TypeORM, PostgreSQL, and TailwindCSS in a Turborepo monorepo.
 
 ## 🚀 Features
